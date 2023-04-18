@@ -144,6 +144,7 @@ class Library{
             cout<<"Index: "<<endl;
             while(infile>>index){
                 Book *lib_book_ptr = new Book;
+                lib_book_ptr -> setIndex(index);
                 cout<<"Title: "<<endl;
                 getline(infile, line)>>line;
                 lib_book_ptr -> setTitle(line);
