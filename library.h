@@ -50,8 +50,10 @@ class Library{
                 if (line == "admin"){
                     Admin *admin_ptr = new Admin;
                     infile>>line;
+                    cout<<endl;
                     admin_ptr -> setFirstName(line);
                     infile>>line;
+                    cout<<endl;
                     admin_ptr -> setLastName(line);
                     infile>>line;
                     admin_ptr -> setDob(line);
@@ -59,6 +61,7 @@ class Library{
                     admin_ptr -> setUsername(line);
                     infile>>line;
                     admin_ptr -> setPassword(line);
+                    cout<<endl;
                     infile>>id;
                     admin_ptr -> setID(id);
                     admin[count_admin] = admin_ptr;
@@ -89,6 +92,7 @@ class Library{
                             }
                         }
                     }
+                    count_student++;
                 }
 
                 else if(line == "faculty"){
@@ -114,6 +118,7 @@ class Library{
                             }
                         }
                     }
+                    count_faculty++;
                 }
                 
                 else if(line == "librarian"){
@@ -130,6 +135,7 @@ class Library{
                     librarian_ptr -> setPassword(line);
                     infile>>id;
                     librarian_ptr -> setID(id);
+                    count_librarian++;
                 }
             }
         }
@@ -141,29 +147,21 @@ class Library{
             double charge;
             ifstream infile;
             infile.open("books.txt");
-            cout<<"Index: "<<endl;
             while(infile>>index){
                 Book *lib_book_ptr = new Book;
                 lib_book_ptr -> setIndex(index);
-                cout<<"Title: "<<endl;
                 getline(infile, line);
                 lib_book_ptr -> setTitle(line);
-                cout<<"Author: " <<endl;
                 getline(infile, line);
                 lib_book_ptr -> setAuthor(line);
-                cout<<"Publisher: " << endl;
                 getline(infile, line);
                 lib_book_ptr -> setPublisher(line);
-                cout<<"Year: " << endl;
                 infile>>index;
                 lib_book_ptr -> setYear(index);
-                cout<<"Borrower: " << endl;
                 getline(infile, line);
                 lib_book_ptr -> setBorrower(line);
-                cout<<"Expired Date: " << endl;
                 infile>>index;
                 lib_book_ptr -> setExpiredDate(index);
-                cout<<"Charge: " <<endl;
                 infile>>charge;
                 lib_book_ptr -> setCharge(charge);
                 lib_book[count_book] = lib_book_ptr;

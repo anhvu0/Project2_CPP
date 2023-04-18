@@ -24,7 +24,7 @@ class Student : public Person{
         }
 
         //Get the type of user for later use
-        string getType() override{
+        string getType(){
             return "Student";
         }
 

@@ -21,7 +21,7 @@ class Faculty : public Person{
             cout<<"User deleted.";
         }
 
-        string getType() override{
+        string getType(){
             return "Faculty";
         }
 

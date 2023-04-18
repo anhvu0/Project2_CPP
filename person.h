@@ -20,7 +20,8 @@ class Person{
             password = "";
             dob = "";
             id = 0000000;
-        };
+        }
+
         Person(const string & first_name_, const string & last_name_,const string & username_, const string & password_, const string & dob_, int id_){
             first_name = first_name_;
             last_name = last_name_;

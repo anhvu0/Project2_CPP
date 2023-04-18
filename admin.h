@@ -24,7 +24,7 @@ class Admin : public Person{
         // }
 
         Admin() : Person(){};
-        string getType() override{
+        string getType(){
             return "Admin";
         }
 
