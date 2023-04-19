@@ -453,7 +453,7 @@ class Library{
                             break;
                         }
                         else{
-                        cout<<"Wrong username or password. Enter role, username, and password again."<<endl;
+                        cout<<"Login failed. Enter role, username, and password again."<<endl;
                         cout<<"Enter your role: "<<endl;
                         }
                     }
@@ -466,7 +466,7 @@ class Library{
                             break;
                         }   
                         else{
-                            cout<<"Wrong username or password. Enter role, username, and password again."<<endl;
+                            cout<<"Login failed. Enter role, username, and password again."<<endl;
                             cout<<"Enter your role: "<<endl;
 
                         }
@@ -480,7 +480,7 @@ class Library{
                             break;
                         }
                         else{
-                            cout<<"Wrong username or password. Enter role, username, and password again."<<endl;
+                            cout<<"Login failed. Enter role, username, and password again."<<endl;
                             cout<<"Enter your role: "<<endl;
 
                         }
@@ -494,9 +494,9 @@ class Library{
                             break;
                         }
                         else{
-                            cout<<"Wrong username or password. Enter role, username, and password again."<<endl;
+                            cout<<"Login failed. Enter role, username, and password again."<<endl;
                             cout<<"Enter your role: "<<endl;
-
+                            
                         }
                     }
                 }
@@ -680,6 +680,7 @@ class Library{
                     }
                     else if (choice == 0){
                         break;
+                        delete user_ptr;
                     }
                 }
             }
