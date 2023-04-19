@@ -25,6 +25,10 @@ class Faculty : public Person{
             return "Faculty";
         }
 
+        void setLateFee(double fee_){
+            late_fee += fee_;
+        }
+
         void setNumBook(int num){
             numbook = num;
         }

@@ -2,6 +2,7 @@
 #include <string>
 using namespace std;
 #pragma once
+#include "book.h"
 
 class Person{
     protected:
@@ -81,6 +82,17 @@ class Person{
         string getPassword(){
             return password;
         }
+
+        virtual int getNumBook(){};
+
+        virtual Book** getBookList(){};
+
+        virtual void setNumBook(int num){};
+
+        virtual void setLateFee(double fee){};
+
+        virtual double getLateFee(){};
+
 
         void printInfo(){
             cout<<"First Name: "<<first_name<<endl;

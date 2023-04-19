@@ -32,6 +32,10 @@ class Student : public Person{
             numbook = num;
         }
 
+        void setLateFee(double fee_){
+            late_fee += fee_;
+        }
+
         int getNumBook(){
             return numbook;
         }
