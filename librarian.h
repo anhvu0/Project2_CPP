@@ -18,5 +18,4 @@ class Librarian : public Person{
         string getType(){
             return "Librarian";
         }
-
 };
