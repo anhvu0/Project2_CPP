@@ -36,6 +36,7 @@ class Library{
             }
         }
 
+        //This function will read the users.txt file to count the number of people of each role and create objects for them. Then their objects will be saved into an appropriate array of each role above.
         void loadFilePerson(){
             Student *student_ptr;
             Faculty *faculty_ptr;
@@ -152,6 +153,7 @@ class Library{
             }
         }
 
+        //Work the same way as above function. It read the books.txt file then count number of books, create objects for them and save those object into the book array.
         void loadFileBook(){
             Book *lib_book_ptr;
             string line;
@@ -372,7 +374,7 @@ class Library{
 
         void viewBorrowedBookStudent(){
             for(int i=0; i < count_student; i++){
-                if (student[i] -> getLateFee() > 0){
+                if (student[i] -> getNumBook() > 0){
                     student[i] -> printInfo();
                     student[i] -> printBorrowedBook();
                     cout<<endl;
@@ -382,7 +384,7 @@ class Library{
 
          void viewBorrowedBookFaculty(){
             for(int i=0; i < count_faculty; i++){
-                if (faculty[i] -> getLateFee() > 0){
+                if (faculty[i] -> getNumBook() > 0){
                     faculty[i] -> printInfo();
                     faculty[i] -> printBorrowedBook();
                     cout<<endl;
@@ -406,15 +408,25 @@ class Library{
 
 
         void getLateFee(int borrower_id_){
-            string current_date;
+            int current_date;
             cout<<"Enter the current date. MMDDYYYY without symbol."<<endl;
             cin>>current_date;
             for(int i=0; i<1000; i++){
                 if(student[i]->getId() == borrower_id_){
-                    student[i]->setLateFee(5);
+                    for(int j=0; j<count_book; j++){
+                        if(lib_book[j]->getExpired() > current_date && lib_book[j]->getCharge()==5){
+                            cout<<"The book is overdue and charge is applied."<<endl;
+                            student[i]->setLateFee(student[i]->getLateFee()+5);
+                        }
+                    }
                 }
                 else if (faculty[i]->getId() == borrower_id_){
-                    faculty[i]->setLateFee(5);
+                    for(int j=0; j<count_book; j++){
+                        if(lib_book[j]->getExpired() > current_date && lib_book[j]->getCharge()==5){
+                            cout<<"The book is overdue and charge is applied."<<endl;
+                            faculty[i]->setLateFee(faculty[i]->getLateFee()+5);
+                        }
+                    }
                 }
             }
 
@@ -428,6 +440,7 @@ class Library{
             for(int i=0; i<count_book; i++){
                 if(lib_book[i]->getIndex() == index){
                     borrower_id = lib_book[i]->getBorrowerId();
+                    cout<<"The id of the borrower is: "<<borrower_id<<endl;
                     if(borrower_id != 0){
                         getLateFee(borrower_id);
                     }
@@ -452,12 +465,13 @@ class Library{
                             user_ptr=admin[i];
                             break;
                         }
-                        else{
-                        cout<<"Login failed. Enter role, username, and password again."<<endl;
-                        cout<<"Enter your role: "<<endl;
-                        }
+                        // else{
+                        // cout<<"Login failed. Enter role, username, and password again."<<endl;
+                        // cout<<"Enter your role: "<<endl;
+                        //}
                     }
                 }
+
                 else if(role == "Librarian"){
                     for(int i=0; i<count_librarian; i++){
                         if (librarian[i]->getUsername() == username && librarian[i]->getPassword() == password){
@@ -465,13 +479,14 @@ class Library{
                             user_ptr = librarian[i];
                             break;
                         }   
-                        else{
-                            cout<<"Login failed. Enter role, username, and password again."<<endl;
-                            cout<<"Enter your role: "<<endl;
+                        // else{
+                        //     cout<<"Login failed. Enter role, username, and password again."<<endl;
+                        //     cout<<"Enter your role: "<<endl;
+                        //}
 
-                        }
                     }
                 }
+
                 else if(role == "Faculty"){
                     for(int i=0; i<count_faculty; i++){
                         if (faculty[i]->getUsername() == username && faculty[i]->getPassword() == password){
@@ -479,25 +494,26 @@ class Library{
                             user_ptr = faculty[i];
                             break;
                         }
-                        else{
-                            cout<<"Login failed. Enter role, username, and password again."<<endl;
-                            cout<<"Enter your role: "<<endl;
+                        // else{
+                        //     cout<<"Login failed. Enter role, username, and password again."<<endl;
+                        //     cout<<"Enter your role: "<<endl;
+                        //}
 
-                        }
                     }
                 }
+
                 else if(role == "Student"){
                     for(int i=0; i<count_librarian; i++){
                         if (student[i]->getUsername() == username && student[i]->getPassword() == password){
                             cout<<"Student login successfully!"<<endl;
                             user_ptr = student[i];
                             break;
-                        }
-                        else{
-                            cout<<"Login failed. Enter role, username, and password again."<<endl;
-                            cout<<"Enter your role: "<<endl;
-                            
-                        }
+                        }        
+                        // else{
+                        //     cout<<"Login failed. Enter role, username, and password again."<<endl;
+                        //     cout<<"Enter your role: "<<endl;
+                        //     break;
+                        // }
                     }
                 }
             }
@@ -519,11 +535,12 @@ class Library{
                     }
                     else if (choice == 0){
                         break;
+                        delete user_ptr;
                     }
                 }
             }
 
-            else if(user_ptr->getType() == "Librarian"){
+            if(user_ptr->getType() == "Librarian"){
                 cout<<"Entering number for each options"<<endl;
                 cout<<"1: Add new student"<<endl;
                 cout<<"2: Delete student"<<endl;
@@ -566,11 +583,12 @@ class Library{
                     }
                     else if (choice == 0){
                         break;
+                        delete user_ptr;
                     }
                 }
             }
 
-            else if(user_ptr->getType() == "Student" || user_ptr->getType() == "Faculty"){
+            if(user_ptr->getType() == "Student" || user_ptr->getType() == "Faculty"){
                 cout<<"Entering number for each options"<<endl;
                 cout<<"1: Check all available book"<<endl;
                 cout<<"2: Check availability of a specific book"<<endl;
@@ -616,16 +634,16 @@ class Library{
                                     }
                                 }
                                 user_ptr -> getBookList()[user_ptr->getNumBook()] = book_ptr;
-                                for(int i=0; i<count_book; i++){
-                                    if (lib_book[i] == book_ptr){
-                                        for(int j=i; j<count_book-1; j++){
-                                            delete lib_book[j];
-                                            lib_book[j]=nullptr;
-                                            lib_book[j] = lib_book[j+1];
-                                        }
-                                    }
-                                }
-                                count_book --;
+                                // for(int i=0; i<count_book; i++){
+                                //     if (lib_book[i] == book_ptr){
+                                //         for(int j=i; j<count_book-1; j++){
+                                //             delete lib_book[j];
+                                //             lib_book[j]=nullptr;
+                                //             lib_book[j] = lib_book[j+1];
+                                //         }
+                                //     }
+                                // }
+                                // count_book --;
                             }
                         }
                         else if(user_ptr -> getType() == "Faculty"){
@@ -641,16 +659,16 @@ class Library{
                                     }
                                 }
                                 user_ptr -> getBookList()[user_ptr->getNumBook()] = book_ptr;
-                                for(int i=0; i<count_book; i++){
-                                    if (lib_book[i] == book_ptr){
-                                        for(int j=i; j<count_book-1; j++){
-                                            delete lib_book[j];
-                                            lib_book[j]=nullptr;
-                                            lib_book[j] = lib_book[j+1];
-                                        }
-                                    }
-                                }
-                                count_book--;
+                                // for(int i=0; i<count_book; i++){
+                                //     if (lib_book[i] == book_ptr){
+                                //         for(int j=i; j<count_book-1; j++){
+                                //             delete lib_book[j];
+                                //             lib_book[j]=nullptr;
+                                //             lib_book[j] = lib_book[j+1];
+                                //         }
+                                //     }
+                                // }
+                                // count_book--;
                             }
                         }
                     }
@@ -667,11 +685,16 @@ class Library{
                                 cin>>index_num;
                                 for(int i=0; i < user_ptr -> getNumBook(); i++){
                                     if (user_ptr->getBookList()[i]->getIndex() == index_num){
-                                        lib_book[count_book] = user_ptr->getBookList()[i];
-                                        count_book++;
                                         user_ptr->setNumBook(user_ptr->getNumBook()-1);
-                                        if(lib_book[count_book]->getExpired()-current_date < 0){
+                                        if(user_ptr->getBookList()[i]->getExpired()>current_date /*&& user_ptr->getBookList()[i]->getCharge()==5*/){
                                             user_ptr -> setLateFee(user_ptr->getLateFee()-5);
+                                            for(int i=0; i<count_book; i++){
+                                                if (lib_book[i]->getIndex() == index_num){
+                                                    lib_book[i]->setBorrowerId(0);
+                                                    lib_book[i]->setExpiredDate(0);
+                                                    // lib_book[i]->setCharge(0);
+                                                }
+                                            }
                                         }
                                     }
                                 }

@@ -23,7 +23,11 @@ class Admin : public Person{
         //     id = id_;
         // }
 
+
+        //Default constructor inherited from class Person’s default constructor
         Admin() : Person(){};
+
+        //getType function override the class Person’s getType to return the role “Admin”
         string getType(){
             return "Admin";
         }
