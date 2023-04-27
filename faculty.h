@@ -33,6 +33,10 @@ class Faculty : public Person{
             numbook = num;
         }
 
+        void setBookList(int num, Book* book_){
+            *booklist[num]= *book_;
+        }
+
         int getNumBook(){
             return numbook;
         }

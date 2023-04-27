@@ -10,7 +10,7 @@ class Book{
         string author;
         string publisher;
         int year;
-        int borrower_id;
+        string borrower_name;
         int expired_date;
         double charge;
 
@@ -20,7 +20,7 @@ class Book{
             title = "";
             publisher = "";
             year = 0;
-            borrower_id = 0;
+            borrower_name = "none";
             expired_date = 0;
             charge = 0.00;
         };
@@ -45,8 +45,8 @@ class Book{
             year = year_;
         }
 
-        void setBorrowerId(int borrower_id_){
-            borrower_id = borrower_id_;
+        void setBorrower(string name_){
+            borrower_name = name_;
         }
 
         void setExpiredDate(int expired_){
@@ -61,8 +61,8 @@ class Book{
             return index;
         }
 
-        int getBorrowerId(){
-            return borrower_id;
+        string getBorrower(){
+            return borrower_name;
         }
 
         double getCharge(){
@@ -83,7 +83,7 @@ class Book{
             cout<<"Author: "<< author <<endl;
             cout<<"Publisher: " << publisher <<endl;
             cout<<"Year: "<<year<<endl;
-            cout<<"Borrower ID: "<< borrower_id << endl;
+            cout<<"Borrower name: "<< borrower_name << endl;
             cout<<"Expired Date: "<<expired_date<<endl;
             cout<<"Charge: "<<charge<<endl;
         }

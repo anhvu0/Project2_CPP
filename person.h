@@ -12,6 +12,9 @@ class Person{
         string dob; //Store the date of birth
         string username; //Store the username
         string password; //Store the password
+        int numbook;
+        double fee;
+        Book** booklist;
 
     public:
         Person(){
@@ -21,6 +24,9 @@ class Person{
             password = "";
             dob = "";
             id = 0000000;
+            numbook = 0;
+            fee = 0;
+            booklist=nullptr;
         }
 
         Person(const string & first_name_, const string & last_name_,const string & username_, const string & password_, const string & dob_, int id_){
@@ -90,19 +96,33 @@ class Person{
         }
 
         //Virtual function so other role can overload to get the number of books they already borrowed
-        virtual int getNumBook(){};
+        virtual int getNumBook(){
+            return numbook;
+        };
 
         //Virtual function to get the list of the book each person borrow
-        virtual Book** getBookList(){};
+        virtual Book** getBookList(){
+            return booklist;
+        };
+
+        virtual void setBookList(int num, Book* book){
+            booklist[num] = book;
+        };
 
         //Virtual function to set the number of book each person borrow
-        virtual void setNumBook(int num){};
+        virtual void setNumBook(int num){
+            numbook = num;
+        };
 
         //Virtual function to set each person’s late fee if they have one
-        virtual void setLateFee(double fee){};
+        virtual void setLateFee(double fee_){
+            fee = fee_;
+        };
 
         //Virtual function to return each person’s late fee if they have one
-        virtual double getLateFee(){};
+        virtual double getLateFee(){
+            return fee;
+        };
 
         //Print basics information of a person including first, last name, date of birth, username, password, id
         void printInfo(){

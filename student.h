@@ -7,11 +7,13 @@ using namespace std;
 
 class Student : public Person{
     private:
-        Book *booklist[10];
-        double late_fee;
+        Book *booklist[10]; // an array of maximum 10 books that have attributes of Book class (10 is the maximum number of book students can borrow)
+        double late_fee; //late fee of the student
         int count;
-        int numbook;
+        int numbook; //the number of books students already borrowed
     public:
+
+        ////Default constructor to initiate a students without any book and late fee
         Student(){
             for (int i=0; i < 10; i++){
                 booklist[i]=nullptr;
@@ -36,10 +38,16 @@ class Student : public Person{
             late_fee += fee_;
         }
 
+        //create a function to add a book into student's booklist.
+        void setBookList(int num, Book* book_){
+            *booklist[num]= *book_;
+        }
+
         int getNumBook(){
             return numbook;
         }
 
+        //create a pointer of Book class type to get a whole array of books student borrowed. That’s why we use double pointer to return a pointer to a whole array.
         Book** getBookList(){
             return booklist;
         }
