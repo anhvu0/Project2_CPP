@@ -218,7 +218,7 @@ class Library{
             cout<<"Enter 'Exit' to exit"<<endl;
             cin>>line;
             if(line == "Exit" || line == "exit"){
-                exit(0);
+                interaction();
             }
             // outfile<<line<<endl;
             student_ptr -> setFirstName(line);
@@ -242,6 +242,7 @@ class Library{
             student_ptr -> setNumBook(id);
             student[count_student] = student_ptr;
             count_student ++;
+            cout<<"Student added successfully"<<endl;
         }
 
         void removeStudent(){
@@ -264,6 +265,7 @@ class Library{
                         student[j] = student[j+1];
                     }
                     count_student --;
+                    cout<<"Student removed successfully"<<endl;
                 }
             }
 
@@ -280,7 +282,7 @@ class Library{
             cout<<"Enter 'Exit' to exit"<<endl;
             cin>>line;
             if(line == "Exit" || line == "exit"){
-                exit(0);
+               interaction();
             }
             // outfile<<line<<endl;
             faculty_ptr -> setFirstName(line);
@@ -304,6 +306,7 @@ class Library{
             faculty_ptr -> setNumBook(id);
             faculty[count_faculty] = faculty_ptr;
             count_faculty ++;
+            cout<<"Faculty added successfully"<<endl;
         }
 
         void removeFaculty(){
@@ -326,6 +329,7 @@ class Library{
                         faculty[j] = faculty[j+1];
                     }
                     count_faculty --;
+                    cout<<"Faculty removed successfully"<<endl;
                 }
             }
         }
@@ -341,27 +345,30 @@ class Library{
             cout<<"To exit, enter 'Exit'"<<endl;
             cin>>line;
             if(line == "Exit" || line == "exit"){
-                exit(0);
+                interaction();
             }
+            else {
             // outfile<<line<<endl;
-            librarian_ptr -> setFirstName(line);
-            cin>>line;
-            // outfile<<line<<endl;
-            librarian_ptr -> setLastName(line);
-            cin>>line;
-            // outfile<<line<<endl;
-            librarian_ptr -> setDob(line);
-            cin>>line;
-            // outfile<<line<<endl;
-            librarian_ptr -> setUsername(line);
-            cin>>line;
-            // outfile<<line<<endl;
-            librarian_ptr -> setPassword(line);
-            cin>>id;
-            // outfile<<id<<endl;
-            librarian_ptr -> setID(id);
-            librarian[count_librarian] = librarian_ptr;
-            count_librarian ++;
+                librarian_ptr -> setFirstName(line);
+                cin>>line;
+                // outfile<<line<<endl;
+                librarian_ptr -> setLastName(line);
+                cin>>line;
+                // outfile<<line<<endl;
+                librarian_ptr -> setDob(line);
+                cin>>line;
+                // outfile<<line<<endl;
+                librarian_ptr -> setUsername(line);
+                cin>>line;
+                // outfile<<line<<endl;
+                librarian_ptr -> setPassword(line);
+                cin>>id;
+                // outfile<<id<<endl;
+                librarian_ptr -> setID(id);
+                librarian[count_librarian] = librarian_ptr;
+                count_librarian ++;
+                cout<<"Librarian added successfully"<<endl;
+            }
         }
 
         void writeFile(){
@@ -426,18 +433,24 @@ class Library{
                 cout<<"No librarian to remove"<<endl;
             }
             int id;
-            cout<<"Enter the id of the librarian you want to remove"<<endl;
+            cout<<"Enter the id of the librarian you want to remove or enter '0' to go back"<<endl;
             cin>>id;
-            for(int i=0; i< count_librarian; i++){
-                if (librarian[i] == nullptr)
-                    continue;
-                if (librarian[i]->getId() == id){
-                    delete librarian[i];
-                    librarian[i] = nullptr;
-                    for(int j=i; j<count_librarian; j++){
-                        librarian[j] = librarian[j+1];
+            if(id == 0){
+                interaction();
+            }
+            else{
+                for(int i=0; i< count_librarian; i++){
+                    if (librarian[i] == nullptr)
+                        continue;
+                    if (librarian[i]->getId() == id){
+                        delete librarian[i];
+                        librarian[i] = nullptr;
+                        for(int j=i; j<count_librarian; j++){
+                            librarian[j] = librarian[j+1];
+                        }
+                        count_librarian --;
+                        cout<<"librarian removed successfully"<<endl;
                     }
-                    count_librarian --;
                 }
             }
         }
@@ -446,7 +459,6 @@ class Library{
             ofstream outfile;
             outfile.open("books.txt");
             for(int i=0; i<count_book; i++){
-                outfile<<endl;
                 outfile<<lib_book[i]->getIndex()<<endl;
                 outfile<<lib_book[i]->getTitle()<<endl;
                 outfile<<lib_book[i]->getAuthor()<<endl;
@@ -455,6 +467,7 @@ class Library{
                 outfile<<lib_book[i]->getBorrower()<<endl;
                 outfile<<lib_book[i]->getExpired()<<endl;
                 outfile<<lib_book[i]->getCharge()<<endl;
+                outfile<<endl;
             }
             outfile.close();
         }
@@ -473,27 +486,30 @@ class Library{
             if(index == 0){
                 exit(0);
             }
-            book_ptr -> setIndex(index);
-            cin.ignore();
-            getline(cin, line);
-            book_ptr -> setTitle(line);
-            cin.ignore();
-            getline(cin, line);
-            book_ptr -> setAuthor(line);
-            cin.ignore();
-            getline(cin, line);
-            book_ptr -> setPublisher(line);
-            cin>>index;
-            book_ptr -> setYear(index);
-            cin.ignore();
-            getline(cin, line);
-            book_ptr -> setBorrower(line);
-            cin>>index;
-            book_ptr -> setExpiredDate(index);
-            cin>>charge;
-            book_ptr -> setCharge(charge);
-            lib_book[count_book] = book_ptr;
-            count_book ++;
+            else{
+                book_ptr -> setIndex(index);
+                cin.ignore();
+                getline(cin, line);
+                book_ptr -> setTitle(line);
+                cin.ignore();
+                getline(cin, line);
+                book_ptr -> setAuthor(line);
+                cin.ignore();
+                getline(cin, line);
+                book_ptr -> setPublisher(line);
+                cin>>index;
+                book_ptr -> setYear(index);
+                cin.ignore();
+                getline(cin, line);
+                book_ptr -> setBorrower(line);
+                cin>>index;
+                book_ptr -> setExpiredDate(index);
+                cin>>charge;
+                book_ptr -> setCharge(charge);
+                lib_book[count_book] = book_ptr;
+                count_book ++;
+                cout<<"Book added successfully"<<endl;
+            }
         }
 
         void removeBook(){
@@ -501,18 +517,24 @@ class Library{
                 cout<<"No books to remove"<<endl;
             }
             int index;
-            cout<<"Enter the index of the book you want to remove"<<endl;
+            cout<<"Enter the index of the book you want to remove or enter '0' to go back"<<endl;
             cin>>index;
-            for(int i=0; i< count_book; i++){
-                if (lib_book[i] == nullptr)
-                    continue;
-                if (lib_book[i]->getIndex() == index){
-                    delete lib_book[i];
-                    lib_book[i] = nullptr;
-                    for(int j=i; j<count_book; j++){
-                        lib_book[j] = lib_book[j+1];
+            if(index == 0){
+                interaction();
+            }
+            else{
+                for(int i=0; i< count_book; i++){
+                    if (lib_book[i] == nullptr)
+                        continue;
+                    if (lib_book[i]->getIndex() == index){
+                        delete lib_book[i];
+                        lib_book[i] = nullptr;
+                        for(int j=i; j<count_book; j++){
+                            lib_book[j] = lib_book[j+1];
+                        }
+                        count_book --;
+                        cout<<"Book removed successfully"<<endl;
                     }
-                    count_book --;
                 }
             }
         }
