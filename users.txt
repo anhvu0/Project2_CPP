@@ -5,7 +5,6 @@ Nguyen
 johnnguyen123
 john123456
 1111111
-0
 
 student
 Anh
@@ -19,7 +18,6 @@ Les Miserables
 11672
 The Hunchback of Notre Dame
 10921
-
 
 librarian
 Josh
@@ -37,5 +35,28 @@ khanglon123
 khanglonnho1
 2345678
 
+librarian
+Mindy
+McMahon
+02/01/2001
+mindy1
+mindy123
+2231145
 
+student
+Ben
+Johnson
+02/03/2000
+ben1
+ben123
+4820133
+0
 
+faculty
+John
+Agnus
+01-05-1996
+johnagnus1
+johnagnus123
+3531234
+0

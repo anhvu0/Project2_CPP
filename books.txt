@@ -15,3 +15,21 @@ The Norton Publisher
 none
 0
 0.00
+
+11375
+Frankenstein
+Marry Shelly
+English Publisher
+1818
+none
+0
+0
+
+19825
+Les Miserables
+ictor Hugo
+rench Publisher
+1820
+none
+0
+0

@@ -55,6 +55,11 @@ class Faculty : public Person{
             }
         }
 
+        string getBookTitle(int num){
+            string arr = booklist[num]->getTitle();
+            return arr;
+        }
+
         // bool borrowBook(const Book & book_){
         //     if (count == 15){
         //         return false;

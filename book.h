@@ -77,6 +77,18 @@ class Book{
             return title;
         }
 
+        string getAuthor(){
+            return author;
+        }
+
+        string getPublisher(){
+            return publisher;
+        }
+
+        int getYear(){
+            return year;
+        }
+
         void printInfo(){
             cout<<"Index: " << index <<endl;
             cout<<"Title: "<< title << endl;

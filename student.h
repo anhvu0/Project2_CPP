@@ -62,6 +62,11 @@ class Student : public Person{
             }
         }
 
+        string getBookTitle(int num){
+            string arr = booklist[num]->getTitle();
+            return arr;
+        }
+
         //Add a function to add a book into the borrowing book array.
         // bool borrowBook(const Book & book_){
         //     if (count == 10){

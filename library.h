@@ -214,32 +214,34 @@ class Library{
             string line;
             int id;
             Student *student_ptr = new Student;
-            ofstream outfile;
-            outfile.open("users.txt", std::ios::app);
-            outfile<<endl;
-            outfile<<"student"<<endl;
-            cout<<"Enter as the following: first name, last name, date of birth, username, password, id"<<endl;
+            cout<<"Enter as the following: first name, last name, date of birth, username, password, id, and number of books borrow(set 0 for new account)"<<endl;
+            cout<<"Enter 'Exit' to exit"<<endl;
             cin>>line;
-            outfile<<line<<endl;
+            if(line == "Exit" || line == "exit"){
+                exit(0);
+            }
+            // outfile<<line<<endl;
             student_ptr -> setFirstName(line);
             cin>>line;
-            outfile<<line<<endl;
+            // outfile<<line<<endl;
             student_ptr -> setLastName(line);
             cin>>line;
-            outfile<<line<<endl;
+            // outfile<<line<<endl;
             student_ptr -> setDob(line);
             cin>>line;
-            outfile<<line<<endl;
+            // outfile<<line<<endl;
             student_ptr -> setUsername(line);
             cin>>line;
-            outfile<<line<<endl;
+            // outfile<<line<<endl;
             student_ptr -> setPassword(line);
             cin>>id;
-            outfile<<id<<endl;
+            // outfile<<id<<endl;
             student_ptr -> setID(id);
+            cin>>id;
+            // outfile<<id<<endl;
+            student_ptr -> setNumBook(id);
             student[count_student] = student_ptr;
             count_student ++;
-            outfile.close();
         }
 
         void removeStudent(){
@@ -247,11 +249,14 @@ class Library{
                 cout<<"No student to remove"<<endl;
             }
             int id;
-            cout<<"Enter the id of the student you want to remove"<<endl;
+            cout<<"Enter the id of the student you want to remove or enter '0' to return"<<endl;
             cin>>id;
+            if(id == 0){
+                interaction();
+            }
             for(int i=0; i< count_student; i++){
-                if (student[i] == nullptr)
-                    continue;
+                // if (student[i] == nullptr)
+                //     continue;
                 if (student[i]->getId() == id){
                     delete student[i];
                     student[i] = nullptr;
@@ -261,41 +266,44 @@ class Library{
                     count_student --;
                 }
             }
+
         }
 
         void addFaculty(){
             if (count_faculty == 1000){
                 cout<<"Full! Cannot add more faculty."<<endl;
             }
-            ofstream outfile;
-            outfile.open("users.txt",std::ios::app);
             string line;
             int id;
             Faculty *faculty_ptr = new Faculty;
-            outfile<<endl;
-            outfile<<"faculty"<<endl;
-            cout<<"Enter as the following: first name, last name, date of birth, username, password, id"<<endl;
+            cout<<"Enter as the following: first name, last name, date of birth, username, password, id, and number of books borrow(set 0 for new account)"<<endl;
+            cout<<"Enter 'Exit' to exit"<<endl;
             cin>>line;
-            outfile<<line<<endl;
+            if(line == "Exit" || line == "exit"){
+                exit(0);
+            }
+            // outfile<<line<<endl;
             faculty_ptr -> setFirstName(line);
             cin>>line;
-            outfile<<line<<endl;
+            // outfile<<line<<endl;
             faculty_ptr -> setLastName(line);
             cin>>line;
-            outfile<<line<<endl;
+            // outfile<<line<<endl;
             faculty_ptr -> setDob(line);
             cin>>line;
-            outfile<<line<<endl;
+            // outfile<<line<<endl;
             faculty_ptr -> setUsername(line);
             cin>>line;
-            outfile<<line<<endl;
+            // outfile<<line<<endl;
             faculty_ptr -> setPassword(line);
             cin>>id;
-            outfile<<id<<endl;
+            // outfile<<id<<endl;
             faculty_ptr -> setID(id);
+            cin>>id;
+            // outfile<<id<<endl;
+            faculty_ptr -> setNumBook(id);
             faculty[count_faculty] = faculty_ptr;
             count_faculty ++;
-            outfile.close();
         }
 
         void removeFaculty(){
@@ -303,11 +311,14 @@ class Library{
                 cout<<"No faculty to remove"<<endl;
             }
             int id;
-            cout<<"Enter the id of the student you want to remove"<<endl;
+            cout<<"Enter the id of the student you want to remove or enter '0' to return"<<endl;
             cin>>id;
+            if(id == 0){
+                interaction();
+            }
             for(int i=0; i< count_faculty; i++){
-                if (faculty[i] == nullptr)
-                    continue;
+                // if (faculty[i] == nullptr)
+                //     continue;
                 if (faculty[i]->getId() == id){
                     delete faculty[i];
                     faculty[i] = nullptr;
@@ -326,35 +337,90 @@ class Library{
             string line;
             int id;
             Librarian *librarian_ptr = new Librarian;
-            ofstream outfile;
-            outfile.open("users.txt", std::ios::app);
-            outfile<<endl;
-            outfile<<"librarian"<<endl;
             cout<<"Enter as the following: first name, last name, date of birth, username, password, id"<<endl;
+            cout<<"To exit, enter 'Exit'"<<endl;
             cin>>line;
-            outfile<<line<<endl;
+            if(line == "Exit" || line == "exit"){
+                exit(0);
+            }
+            // outfile<<line<<endl;
             librarian_ptr -> setFirstName(line);
             cin>>line;
-            outfile<<line<<endl;
+            // outfile<<line<<endl;
             librarian_ptr -> setLastName(line);
             cin>>line;
-            outfile<<line<<endl;
+            // outfile<<line<<endl;
             librarian_ptr -> setDob(line);
             cin>>line;
-            outfile<<line<<endl;
+            // outfile<<line<<endl;
             librarian_ptr -> setUsername(line);
             cin>>line;
-            outfile<<line<<endl;
+            // outfile<<line<<endl;
             librarian_ptr -> setPassword(line);
             cin>>id;
-            outfile<<id<<endl;
+            // outfile<<id<<endl;
             librarian_ptr -> setID(id);
             librarian[count_librarian] = librarian_ptr;
             count_librarian ++;
+        }
+
+        void writeFile(){
+            ofstream outfile;
+            outfile.open("users.txt");
+            for(int i=0; i<count_admin; i++){
+                outfile<<admin[i]->getType()<<endl;
+                outfile<<admin[i]->getFirstName()<<endl;
+                outfile<<admin[i]->getLastName()<<endl;
+                outfile<<admin[i]->getDob()<<endl;
+                outfile<<admin[i]->getUsername()<<endl;
+                outfile<<admin[i]->getPassword()<<endl;
+                outfile<<admin[i]->getId()<<endl;
+                outfile<<endl;
+            }
+
+            for(int i=0; i<count_librarian; i++){
+                outfile<<librarian[i]->getType()<<endl;
+                outfile<<librarian[i]->getFirstName()<<endl;
+                outfile<<librarian[i]->getLastName()<<endl;
+                outfile<<librarian[i]->getDob()<<endl;
+                outfile<<librarian[i]->getUsername()<<endl;
+                outfile<<librarian[i]->getPassword()<<endl;
+                outfile<<librarian[i]->getId()<<endl;
+                outfile<<endl;
+            }
+            for(int i=0; i<count_student; i++){
+                outfile<<student[i]->getType()<<endl;
+                outfile<<student[i]->getFirstName()<<endl;
+                outfile<<student[i]->getLastName()<<endl;
+                outfile<<student[i]->getDob()<<endl;
+                outfile<<student[i]->getUsername()<<endl;
+                outfile<<student[i]->getPassword()<<endl;
+                outfile<<student[i]->getId()<<endl;
+                outfile<<student[i]->getNumBook()<<endl;
+                for(int j=0; j<student[i]->getNumBook(); j++){
+                    outfile<<student[i]->getBookTitle(j)<<endl;
+                }
+                outfile<<endl;
+            }
+            for(int i=0; i<count_faculty; i++){
+                outfile<<faculty[i]->getType()<<endl;
+                outfile<<faculty[i]->getFirstName()<<endl;
+                outfile<<faculty[i]->getLastName()<<endl;
+                outfile<<faculty[i]->getDob()<<endl;
+                outfile<<faculty[i]->getUsername()<<endl;
+                outfile<<faculty[i]->getPassword()<<endl;
+                outfile<<faculty[i]->getId()<<endl;
+                outfile<<faculty[i]->getNumBook()<<endl;
+                for(int j=0; j<faculty[i]->getNumBook(); j++){
+                    outfile<<faculty[i]->getBookTitle(j)<<endl;
+                }
+                outfile<<endl;
+            }
             outfile.close();
         }
 
         //Don't know how to remove from the files yet.
+        // Can try seperating the write into txt file part and write a whole file again every time an object is deleted from array
         void removeLibrarian(){
             if (count_librarian == 0){
                 cout<<"No librarian to remove"<<endl;
@@ -376,6 +442,23 @@ class Library{
             }
         }
 
+        void writeBook(){
+            ofstream outfile;
+            outfile.open("books.txt");
+            for(int i=0; i<count_book; i++){
+                outfile<<endl;
+                outfile<<lib_book[i]->getIndex()<<endl;
+                outfile<<lib_book[i]->getTitle()<<endl;
+                outfile<<lib_book[i]->getAuthor()<<endl;
+                outfile<<lib_book[i]->getPublisher()<<endl;
+                outfile<<lib_book[i]->getYear()<<endl;
+                outfile<<lib_book[i]->getBorrower()<<endl;
+                outfile<<lib_book[i]->getExpired()<<endl;
+                outfile<<lib_book[i]->getCharge()<<endl;
+            }
+            outfile.close();
+        }
+
         void addBook(){
             if (count_book == 1000){
                 cout<<"Full! Cannot add more books."<<endl;
@@ -384,37 +467,30 @@ class Library{
             int index;
             double charge;
             Book *book_ptr = new Book;
-            ofstream outfile;
-            outfile.open("books.txt");
-            outfile<<endl;
             cout<<"Enter as the following: index, title, author, publisher, year, borrower, expired_date, charge"<<endl;
+            cout<<"To exit, enter '0' in the index"<<endl;
             cin>>index;
-            outfile<<index;
+            if(index == 0){
+                exit(0);
+            }
             book_ptr -> setIndex(index);
             cin.ignore();
             getline(cin, line);
-            outfile<<line<<endl;
             book_ptr -> setTitle(line);
             cin.ignore();
             getline(cin, line);
-            outfile<<line<<endl;
             book_ptr -> setAuthor(line);
             cin.ignore();
             getline(cin, line);
-            outfile<<line<<endl;
             book_ptr -> setPublisher(line);
             cin>>index;
-            outfile<<index<<endl;
             book_ptr -> setYear(index);
             cin.ignore();
             getline(cin, line);
-            outfile<<line<<endl;
             book_ptr -> setBorrower(line);
             cin>>index;
-            outfile<<index<<endl;
             book_ptr -> setExpiredDate(index);
             cin>>charge;
-            outfile<<charge<<endl;
             book_ptr -> setCharge(charge);
             lib_book[count_book] = book_ptr;
             count_book ++;
@@ -613,6 +689,7 @@ class Library{
                         removeLibrarian();
                     }
                     else if (choice == 0){
+                        writeFile();
                         exit(0);
                     }
                     interaction();
@@ -630,40 +707,41 @@ class Library{
                 cout<<"8: Check return due date of a specific book"<<endl;
                 cout<<"0: Exit."<<endl;
                 cin >> choice;
-                    if (choice == 1){
-                        addStudent();
+                if (choice == 1){
+                    addStudent();
+                }
+                else if(choice == 2){
+                    removeStudent();
+                }
+                else if(choice == 3){
+                    addFaculty();
+                }
+                else if (choice == 4){
+                    removeFaculty();
+                }
+                else if (choice == 5){
+                    addBook();
+                }
+                else if (choice == 6){
+                    removeBook();
+                }
+                else if (choice == 7){
+                    viewBorrower();
+                }
+                else if (choice == 8){
+                    int book_index;
+                    cout<<"Enter index of the book you want to check: "<<endl;
+                    cin>>book_index;
+                    for(int i=0; i<count_book; i++){
+                        cout<<lib_book[i]->getExpired()<<endl;
                     }
-                    else if(choice == 2){
-                        removeStudent();
-                    }
-                    else if(choice == 3){
-                        addFaculty();
-                    }
-                    else if (choice == 4){
-                        removeFaculty();
-                    }
-                    else if (choice == 5){
-                        addBook();
-                    }
-                    else if (choice == 6){
-                        removeBook();
-                    }
-                    else if (choice == 7){
-                        viewBorrower();
-                    }
-                    else if (choice == 8){
-                        int book_index;
-                        cout<<"Enter index of the book you want to check: "<<endl;
-                        cin>>book_index;
-                        for(int i=0; i<count_book; i++){
-                            cout<<lib_book[i]->getExpired()<<endl;
-                        }
-                    }
-                    else if (choice == 0){
-                        exit(0);
-                    }
-
-                    interaction();
+                }
+                else if (choice == 0){
+                    writeBook();
+                    writeFile();
+                    exit(0);
+                }
+                interaction();
             }
 
             else if(user_ptr->getType() == "Student" || user_ptr->getType() == "Faculty"){
@@ -674,124 +752,125 @@ class Library{
                 cout<<"4: Return a book"<<endl;
                 cout<<"0: Exit."<<endl;
                 cin >> choice;
-                    if (choice == 1){
-                        for(int i=0; i<count_book; i++){
-                            cout<<lib_book[i]->getTitle()<<" | index: "<<lib_book[i]->getIndex()<<endl;
-                        };
-                        cout<<endl;
+                if (choice == 1){
+                    for(int i=0; i<count_book; i++){
+                        cout<<lib_book[i]->getTitle()<<" | index: "<<lib_book[i]->getIndex()<<endl;
+                    };
+                    cout<<endl;
+                }
+                else if(choice == 2){
+                    cout<<"Enter the name of the book: "<<endl;
+                    string name;
+                    int count_available=0;
+                    int array[1000];
+                    cin.ignore();
+                    getline(cin, name);
+                    for(int i=0; i< count_book; i++){
+                        if(lib_book[i]->getTitle() == name && lib_book[i]->getBorrower() == "none"){
+                            array[count_available] = lib_book[i]->getIndex();
+                            count_available++;
+                        }
+                        // for(int j=0; j<count_available; j++){
+                        //     if(lib_book[i]->getTitle() == name && lib_book[i]->getBorrowerId() == 0){
+                        //         array[j] = lib_book[j]->getIndex();
+                        //     }
+                        // }
                     }
-                    else if(choice == 2){
-                        cout<<"Enter the name of the book: "<<endl;
-                        string name;
-                        int count_available=0;
-                        int array[1000];
-                        cin.ignore();
-                        getline(cin, name);
-                        for(int i=0; i< count_book; i++){
-                            if(lib_book[i]->getTitle() == name && lib_book[i]->getBorrower() == "none"){
-                                array[count_available] = lib_book[i]->getIndex();
-                                count_available++;
+                    cout<<"There are "<<count_available<<" copies available and their index numbers are: "<<endl;
+                    for(int j=0; j<count_available;j++){
+                        cout<<array[j]<<endl;
+                    }
+                    cout<<endl;
+                }
+
+                else if(choice == 3){
+                    int index_num;
+                    Book* book_ptr;
+                    int current_date;
+                    if(user_ptr -> getType() == "Student"){
+                        if(user_ptr->getNumBook() >= 10){
+                            cout<<"Cannot borrow more book";
+                        }
+                        else if (user_ptr -> getNumBook() < 10){
+                            cout<<"Enter the index of the book you want to borrow: "<<endl;
+                            cin>>index_num;
+
+                            //Dont't know what to do yet about the date
+                            // cout<<"Enter current date as MMDDYYYY"<<endl;
+                            // cin>>current_date;
+
+                            for(int i=0; i<count_book; i++){
+                                if (lib_book[i]->getIndex() == index_num){
+                                    book_ptr = lib_book[i];
+                                    lib_book[i]->setBorrower(user_ptr->getFirstName()+' '+user_ptr->getLastName());
+                                }
                             }
-                            // for(int j=0; j<count_available; j++){
-                            //     if(lib_book[i]->getTitle() == name && lib_book[i]->getBorrowerId() == 0){
-                            //         array[j] = lib_book[j]->getIndex();
+                            user_ptr -> setBookList(user_ptr->getNumBook(), book_ptr);
+                            cout<<"Book borrowed successfully"<<endl;
+
+                            //Dont't know what to do yet about the date
+                            // cout<<"The expiration date will be"<<current_date+300000<<endl;
+                        }
+                    }
+                    else if(user_ptr -> getType() == "Faculty"){
+                        if(user_ptr->getNumBook() == 15){
+                            cout<<"Cannot borrow more book";
+                        }
+                        else if (user_ptr -> getNumBook() < 15){
+                            cout<<"Enter the index of the book you want to borrow: "<<endl;
+                            cin>>index_num;
+                            for(int i=0; i<count_book; i++){
+                                if (lib_book[i]->getIndex() == index_num){
+                                    book_ptr = lib_book[i];
+                                }
+                            }
+                            user_ptr -> setBookList(user_ptr->getNumBook(), book_ptr);                                // for(int i=0; i<count_book; i++){
+                            //     if (lib_book[i] == book_ptr){
+                            //         for(int j=i; j<count_book-1; j++){
+                            //             delete lib_book[j];
+                            //             lib_book[j]=nullptr;
+                            //             lib_book[j] = lib_book[j+1];
+                            //         }
                             //     }
                             // }
-                        }
-                        cout<<"There are "<<count_available<<" copies available and their index numbers are: "<<endl;
-                        for(int j=0; j<count_available;j++){
-                            cout<<array[j]<<endl;
-                        }
-                        cout<<endl;
-                    }
-
-                    else if(choice == 3){
-                        int index_num;
-                        Book* book_ptr;
-                        int current_date;
-                        if(user_ptr -> getType() == "Student"){
-                            if(user_ptr->getNumBook() >= 10){
-                                cout<<"Cannot borrow more book";
-                            }
-                            else if (user_ptr -> getNumBook() < 10){
-                                cout<<"Enter the index of the book you want to borrow: "<<endl;
-                                cin>>index_num;
-
-                                //Dont't know what to do yet about the date
-                                // cout<<"Enter current date as MMDDYYYY"<<endl;
-                                // cin>>current_date;
-
-                                for(int i=0; i<count_book; i++){
-                                    if (lib_book[i]->getIndex() == index_num){
-                                        book_ptr = lib_book[i];
-                                        lib_book[i]->setBorrower(user_ptr->getFirstName()+' '+user_ptr->getLastName());
-                                    }
-                                }
-                                user_ptr -> setBookList(user_ptr->getNumBook(), book_ptr);
-                                cout<<"Book borrowed successfully"<<endl;
-
-                                //Dont't know what to do yet about the date
-                                // cout<<"The expiration date will be"<<current_date+300000<<endl;
-                            }
-                        }
-                        else if(user_ptr -> getType() == "Faculty"){
-                            if(user_ptr->getNumBook() == 15){
-                                cout<<"Cannot borrow more book";
-                            }
-                            else if (user_ptr -> getNumBook() < 15){
-                                cout<<"Enter the index of the book you want to borrow: "<<endl;
-                                cin>>index_num;
-                                for(int i=0; i<count_book; i++){
-                                    if (lib_book[i]->getIndex() == index_num){
-                                        book_ptr = lib_book[i];
-                                    }
-                                }
-                                user_ptr -> setBookList(user_ptr->getNumBook(), book_ptr);                                // for(int i=0; i<count_book; i++){
-                                //     if (lib_book[i] == book_ptr){
-                                //         for(int j=i; j<count_book-1; j++){
-                                //             delete lib_book[j];
-                                //             lib_book[j]=nullptr;
-                                //             lib_book[j] = lib_book[j+1];
-                                //         }
-                                //     }
-                                // }
-                                // count_book--;
-                            }
+                            // count_book--;
                         }
                     }
-                    else if (choice == 4){
-                        int index_num;
-                        int current_date;
-                            if(user_ptr->getNumBook() == 0){
-                                cout<<"You have no books to return";
-                            }
-                            else if (user_ptr -> getNumBook() > 0){
-                                cout<<"Enter the current date as MMDDYYYY without symbols."<<endl;
-                                cin>>current_date;
-                                cout<<"Enter the index of the book you want to return: "<<endl;
-                                cin>>index_num;
-                                for(int i=0; i < user_ptr -> getNumBook(); i++){
-                                    if (user_ptr->getBookList()[i]->getIndex() == index_num){
-                                        user_ptr->setNumBook(user_ptr->getNumBook()-1);
-                                        if(user_ptr->getBookList()[i]->getExpired()>current_date /*&& user_ptr->getBookList()[i]->getCharge()==5*/){
-                                            user_ptr -> setLateFee(user_ptr->getLateFee()-5);
-                                            for(int i=0; i<count_book; i++){
-                                                if (lib_book[i]->getIndex() == index_num){
-                                                    lib_book[i]->setBorrower("none");
-                                                    lib_book[i]->setExpiredDate(0);
-                                                    // lib_book[i]->setCharge(0);
-                                                }
+                }
+                else if (choice == 4){
+                    int index_num;
+                    int current_date;
+                        if(user_ptr->getNumBook() == 0){
+                            cout<<"You have no books to return";
+                        }
+                        else if (user_ptr -> getNumBook() > 0){
+                            cout<<"Enter the current date as MMDDYYYY without symbols."<<endl;
+                            cin>>current_date;
+                            cout<<"Enter the index of the book you want to return: "<<endl;
+                            cin>>index_num;
+                            for(int i=0; i < user_ptr -> getNumBook(); i++){
+                                if (user_ptr->getBookList()[i]->getIndex() == index_num){
+                                    user_ptr->setNumBook(user_ptr->getNumBook()-1);
+                                    if(user_ptr->getBookList()[i]->getExpired()>current_date /*&& user_ptr->getBookList()[i]->getCharge()==5*/){
+                                        user_ptr -> setLateFee(user_ptr->getLateFee()-5);
+                                        for(int i=0; i<count_book; i++){
+                                            if (lib_book[i]->getIndex() == index_num){
+                                                lib_book[i]->setBorrower("none");
+                                                lib_book[i]->setExpiredDate(0);
+                                                // lib_book[i]->setCharge(0);
                                             }
                                         }
                                     }
                                 }
                             }
+                        }
 
-                    }
-                    else if (choice == 0){
-                        exit(0);
-                    }
-                    interaction();
+                }
+                else if (choice == 0){
+                    exit(0);
+                }
+                interaction();
             }
         }
+
 };
